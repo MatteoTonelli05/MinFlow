@@ -1,7 +1,7 @@
 import heapq
 import numpy as np
 
-def init(graph_data, start_node_id):
+def __init(graph_data, start_node_id):
     nodes_info = {
         node["id"]: {
             "neighbors": [], 
@@ -19,7 +19,7 @@ def init(graph_data, start_node_id):
     return nodes_info, heap_cost
 
 def solve(graph_data, start_node_id, end_node_id):
-    nodes_info, heap_cost = init(graph_data, start_node_id)
+    nodes_info, heap_cost = __init(graph_data, start_node_id)
 
     while (heap_cost):  
         current_cost, current_id = heapq.heappop(heap_cost)
@@ -31,10 +31,3 @@ def solve(graph_data, start_node_id, end_node_id):
                 heapq.heappush(heap_cost, (new_cost, neigh_id))
     
     return nodes_info
-
-
-
-    
-
-
-    

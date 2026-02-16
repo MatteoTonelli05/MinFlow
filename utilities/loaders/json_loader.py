@@ -1,6 +1,6 @@
 import json
 
-def graphJsonLoad(file_path):
+def graphJsonLoad(file_path:str):
     try:
         with open(file_path, 'r') as file_json:
             graph_data = json.load(file_json)
@@ -21,7 +21,3 @@ def graphJsonLoad(file_path):
         print("Errore: Il file non è un JSON valido.")
     except Exception as e:
         print(f"Errore imprevisto: {e}")
-
-# Esempio di utilizzo
-file_path = r"resource\grafo_iniziale.json" # la 'r' serve per gestire i backslash di Windows
-grafo = graphJsonLoad(file_path)
