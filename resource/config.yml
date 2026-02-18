@@ -1,7 +1,7 @@
 # PLOTTING
 
 figure_size: [7, 5]
-node_color: "lightgreen"
+node_color: "red"
 node_size: 700
 font_size_edge_labels: 8
 arrow_size: 25
