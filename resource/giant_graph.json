@@ -1,0 +1,151 @@
+{
+    "nodes": [
+        {
+            "id": "s1",
+            "supply": 15
+        },
+        {
+            "id": "s2",
+            "supply": 20
+        },
+        {
+            "id": "s3",
+            "supply": 15
+        },
+        {
+            "id": "v1",
+            "supply": 0
+        },
+        {
+            "id": "v2",
+            "supply": 0
+        },
+        {
+            "id": "v3",
+            "supply": 0
+        },
+        {
+            "id": "v4",
+            "supply": 0
+        },
+        {
+            "id": "t1",
+            "supply": -20
+        },
+        {
+            "id": "t2",
+            "supply": -15
+        },
+        {
+            "id": "t3",
+            "supply": -15
+        }
+    ],
+    "edges": [
+        {
+            "source": "s1",
+            "target": "s2",
+            "capacity": 1,
+            "cost": 2,
+            "flow": 0
+        },
+        {
+            "source": "s1",
+            "target": "v1",
+            "capacity": 20,
+            "cost": 2,
+            "flow": 0
+        },
+        {
+            "source": "s1",
+            "target": "v2",
+            "capacity": 10,
+            "cost": 4,
+            "flow": 0
+        },
+        {
+            "source": "s2",
+            "target": "v1",
+            "capacity": 15,
+            "cost": 1,
+            "flow": 0
+        },
+        {
+            "source": "s2",
+            "target": "v3",
+            "capacity": 20,
+            "cost": 3,
+            "flow": 0
+        },
+        {
+            "source": "s3",
+            "target": "v2",
+            "capacity": 15,
+            "cost": 2,
+            "flow": 0
+        },
+        {
+            "source": "s3",
+            "target": "v4",
+            "capacity": 15,
+            "cost": 5,
+            "flow": 0
+        },
+        {
+            "source": "v1",
+            "target": "t1",
+            "capacity": 15,
+            "cost": 2,
+            "flow": 0
+        },
+        {
+            "source": "v1",
+            "target": "v3",
+            "capacity": 10,
+            "cost": 1,
+            "flow": 0
+        },
+        {
+            "source": "v2",
+            "target": "t1",
+            "capacity": 10,
+            "cost": 6,
+            "flow": 0
+        },
+        {
+            "source": "v2",
+            "target": "t2",
+            "capacity": 15,
+            "cost": 2,
+            "flow": 0
+        },
+        {
+            "source": "v3",
+            "target": "t2",
+            "capacity": 10,
+            "cost": 4,
+            "flow": 0
+        },
+        {
+            "source": "v3",
+            "target": "t3",
+            "capacity": 15,
+            "cost": 2,
+            "flow": 0
+        },
+        {
+            "source": "v4",
+            "target": "t3",
+            "capacity": 20,
+            "cost": 1,
+            "flow": 0
+        },
+        {
+            "source": "v1",
+            "target": "v2",
+            "capacity": 5,
+            "cost": 1,
+            "flow": 0
+        }
+    ]
+}

@@ -1,8 +1,3 @@
-# INPUT
-
-startNode : "s1"
-targetNode : "t2"
-
 # PLOTTING
 
 figure_size: [7, 5]
@@ -10,7 +5,7 @@ node_color: "lightgreen"
 node_size: 700
 font_size_edge_labels: 8
 arrow_size: 25
-layout_k: 2    # Distanza tra i nodi nel layout spring
-seed: 42 
+layout_k: 10    # Distanza tra i nodi nel layout spring
+seed: 0 
 edge_target_margin : 12
 edge_curve_rad: 0 # 0 per le linee dritte
