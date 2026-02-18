@@ -19,8 +19,8 @@ class GraphChecker:
 
     def _is_balanced(self) -> bool:
         """controlla Bilanciamento: Σ bi = 0"""
-        supply = map(lambda x: x.supply, self._to_check.get_supply())
-        demand = map(lambda x: x.supply, self._to_check.get_demand())
+        supply = map(lambda x: x.supply, self._to_check.get_supply_nodes())
+        demand = map(lambda x: x.supply, self._to_check.get_demand_nodes())
         return sum(supply) == -sum(demand)
         
     def _has_negative_costs(self) -> bool:
@@ -39,10 +39,9 @@ class GraphChecker:
             2. Grafo direzionato
             3. Bilanciamento: Σ bi = 0
             4. Esistenza soluzione ammissibile <== in caso contrario la soluzione sarà uguale a zero)
-            5. Connettività (cammino tra ogni coppia di nodi) <== in caso contrario la soluzione sarà uguale a zero)
+            5. Connettività (cammino tra ogni coppia di nodi) <== in caso contrario i nodi non saranno navigati e basta)
             6. Costi non negativi e capacità positive 
         """
-        
         return self._is_directed() and self._is_balanced() \
               and not self._has_negative_costs() and not self._has_zero_capacities()
 

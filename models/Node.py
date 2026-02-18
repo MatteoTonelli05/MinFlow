@@ -1,3 +1,6 @@
+from dataclasses import dataclass
+
+@dataclass
 class Node:
     id: str
     supply: int = 0
@@ -17,17 +20,10 @@ class Node:
 
     @classmethod
     def from_dict(cls, data: dict) -> "Node":
-        tmp = cls()
-        tmp.id=data["id"]
-        tmp.supply=data.get("supply", 0)
-        return tmp
-
-    def __repr__(self):
-        return f"Node(id={self.id}, supply={self.supply})"
-
-    def __eq__(self, other):
-        if not isinstance(other, Node):
-            return False
-        return self.id == other.id
-
+        # Spacchettiamo il dizionario direttamente nel costruttore
+        return cls(
+            id=data["id"],
+            supply=data.get("supply", 0),
+            label=data.get("label", "")
+        )
 
