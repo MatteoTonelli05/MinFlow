@@ -14,18 +14,19 @@ def dijkstra(graph: Graph, start_node_id: str):
     priority_heap = [(0, start_node_id)]
     
     while priority_heap:
-        current_distance, u_id = heapq.heappop(priority_heap)
-        if current_distance > distances[u_id]: #racchiude anche i nodi è già rilassati
+        current_distance, current_id = heapq.heappop(priority_heap)
+        if current_distance > distances[current_id]: # racchiude anche i nodi è già rilassati
             continue
 
-        for edge in graph.get_adj(u_id):
-            v_id = edge.target
-            weight = edge.cost
-            new_distance = current_distance + weight
+        for edge in graph.get_adj(current_id):
+            target_id = edge.target
+            # il calcolo di dijsktra deve essere fatto sul costo ridotto
+            target_distance = edge.cost - edge.source.potential + edge.target.potential 
+            new_distance = current_distance + target_distance
 
-            if new_distance < distances[v_id]:
-                distances[v_id] = new_distance
-                predecessors[v_id] = u_id
-                heapq.heappush(priority_heap, (new_distance, v_id))
+            if new_distance < distances[target_id]:
+                distances[target_id] = new_distance
+                predecessors[target_id] = current_id
+                heapq.heappush(priority_heap, (new_distance, target_id))
     
     return distances, predecessors

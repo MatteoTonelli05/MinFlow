@@ -5,6 +5,7 @@ class Node:
     id: str
     supply: int = 0
     label: str = ""
+    potential : int = 0
 
     def __post_init__(self) -> None:
         if not self.id:
