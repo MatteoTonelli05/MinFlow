@@ -20,12 +20,13 @@ def selectSource(graph: Graph) -> Node:
     else:
         return None
 
-def theres_path(graph: Graph, distances):
+def theres_path(graph: Graph, distances) -> bool:
     """
     Controlla se i nodi demand (supply < 0) siano raggiungibili
     
     :param graph: grafo su cui eseguire la ricerca 
     :param distances: distanze dal nodo iniziale come dizionario {id_nodo: distanza}
+    :return se c'è ancora un cammino disponibile nel grafo
     """
     return any(distances.get(n.id) < float('inf') for n in graph.get_demand_nodes())
 
@@ -49,7 +50,6 @@ ok = 1
 if checker.validateGraph():
     while ok > 0:
         plot(graph, dict(Loader().from_yaml(config_path)))
-        pprint.pp(graph)
         s = selectSource(graph)
         
         if s and s.supply > 0:
@@ -71,7 +71,7 @@ if checker.validateGraph():
                 print("Nessun cammino verso nodi di domanda: soluzione non ammissibile.")
                 ok = -1
         else:
-            print("Tutte le domande soddisfatte: Soluzione Ottima!")
+            print(graph)
             ok = 0
 else:
     print("Il grafo non rispetta i vincoli base (assunzioni) del Minimum Cost Max Flow")

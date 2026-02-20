@@ -6,6 +6,12 @@ class Loader:
 
     @staticmethod
     def from_json(file_path: str):
+        """
+        carica un dizionario da un file json (usato per il grafo)
+        
+        :type file_path: percorso del file
+        :return dizionario rappresentante il file
+        """
         path = Path(file_path)
         if not path.exists():
             print(f"File non trovato: '{path}'")
@@ -23,6 +29,12 @@ class Loader:
 
     @staticmethod
     def from_yaml(file_path: str):
+        """
+        carica un dizionario da un file yaml (usato per le configurazioni)
+        
+        :type file_path: percorso del file
+        :return dizionario rappresentante il file
+        """
         path = Path(file_path)
         if not path.exists():
             print(f"File non trovato: '{path}'")

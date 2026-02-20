@@ -127,4 +127,13 @@ class Graph:
         return path[::-1] # Inverte per avere l'ordine da sorgente a destinazione
 
     def __repr__(self) -> str:
-        return f"Graph(nodes={len(self._nodes)}, edges={len(self._edges)})"
+        title = "--- Stampa Grafico ---\n\n"
+        totalCost = 0
+        nodesDes : list[str] = [title]
+        for n in self._nodes:
+            nodesDes.append(f"archi uscenti dal nodo {n}:\n")
+            for e in self._adj.get(n, []):
+                nodesDes.append(f"\t{e}\n")
+                totalCost += e.cost if e.flow > 0 else 0
+        nodesDes.append(f"il costo complessivo del flusso è {str(totalCost)}")
+        return "".join(nodesDes)

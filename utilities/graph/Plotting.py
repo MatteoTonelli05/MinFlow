@@ -56,7 +56,13 @@ def plot(graph : Graph, config: dict):
     edge_artists = [ig.edge_artists[e] for e in ig.edge_artists]
     edge_keys = list(ig.edge_artists.keys())
 
-    def on_motion(event):
+    def _on_motion(event):
+        """
+        gestore di eventi per il movimento del mouse
+        
+        aggiorna il titolo del grafico mostrando i dettagli dell'arco (sorgente, 
+        destinazione e dati di flusso) se il puntatore si trova sopra un arco.
+        """
         if event.inaxes != ax:
             return
         for i, (edge_key, artist) in enumerate(ig.edge_artists.items()):
@@ -71,6 +77,6 @@ def plot(graph : Graph, config: dict):
         ax.set_title("")
         fig.canvas.draw_idle()
 
-    fig.canvas.mpl_connect('motion_notify_event', on_motion)
+    fig.canvas.mpl_connect('motion_notify_event', _on_motion)
 
     plt.show()
