@@ -4,7 +4,6 @@ from dataclasses import dataclass
 class Node:
     id: str
     supply: int = 0
-    label: str = ""
     potential : int = 0
 
     def __post_init__(self) -> None:
@@ -24,7 +23,6 @@ class Node:
         # Spacchettiamo il dizionario direttamente nel costruttore
         return cls(
             id=data["id"],
-            supply=data.get("supply", 0),
-            label=data.get("label", "")
+            supply=data.get("supply", 0)
         )
 

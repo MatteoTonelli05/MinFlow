@@ -1,10 +1,12 @@
 from models.Graph import Graph
 from models.Node import Node
+from models.Edge import Edge
 from utilities.graph.GraphChecker import GraphChecker
 from pathlib import Path
-from utilities.graph.plot_graph import plot
+from utilities.graph.Plotting import plot
 from utilities.loaders.Loader import Loader
 from utilities.known_algorithms.Disjkstra import dijkstra
+import pprint
 
 def selectSource(graph: Graph) -> Node:
     """
@@ -13,7 +15,10 @@ def selectSource(graph: Graph) -> Node:
     :param graph: grafo su cui eseguire la ricerca
     """
     supplies = graph.get_supply_nodes()
-    return (max(graph.get_supply_nodes(), lambda x: x.supply) if supplies else None)
+    if supplies:
+        return max(supplies, key = lambda x: x.supply)
+    else:
+        return None
 
 def theres_path(graph: Graph, distances):
     """
@@ -24,6 +29,18 @@ def theres_path(graph: Graph, distances):
     """
     return any(distances.get(n.id) < float('inf') for n in graph.get_demand_nodes())
 
+def get_min_residual_capacity(path: list[Edge]) -> int:
+        """
+        Data una lista di archi che rappresentano il cammino,
+        restituisce la minima capacità residua disponibile.
+
+        :param path: lista di archi che rappresentano il cammino
+        :return: minima capacità residua disponibile.
+        """
+        if path:
+            return min(map(lambda x: x.residual_capacity, path))
+        return 0
+
 file_path = Path("resource") / "grafo_iniziale.json"
 config_path = Path("resource") / "config.yml"
 graph = Graph(file_path)
@@ -32,28 +49,29 @@ ok = 1
 if checker.validateGraph():
     while ok > 0:
         plot(graph, dict(Loader().from_yaml(config_path)))
+        pprint.pp(graph)
         s = selectSource(graph)
         
-        if s:
+        if s and s.supply > 0:
             distances, predecessors = dijkstra(graph, s.id)
-            targets = [n for n in graph.get_demand_nodes() if distances.get(n.id) < float('inf')]
-            
+            targets = [n for n in graph.get_demand_nodes() if distances.get(n.id) != float('inf')]
             if targets:
-                t = min(targets, lambda x: x.supply)
+                t = min(targets, key=lambda x: x.supply)
                 
-                path = graph.reconstruct_path(predecessors, s.id, t.id) #TO-DO
-                delta = min(s.supply, abs(t.supply), graph.get_min_residual_capacity(path)) #TO-DO
-                graph.augment_flow(path, delta) #TO-DO
+                path = graph.reconstruct_path(predecessors, s.id, t.id)
+                delta = min(s.supply, abs(t.supply), get_min_residual_capacity(path=path))
+                graph.augment_flow(path, delta)
+                s.supply -= delta
+                t.supply += delta
                 
-                for n in graph.nodes():
+                for n in graph.nodes:
                     if distances.get(n.id) < float('inf'):
                         n.potential = n.potential - distances.get(n.id)
             else:
-                # Se ho ancora supply ma non raggiungo nessuna demand, non c'è soluzione ammissibile
                 print("Nessun cammino verso nodi di domanda: soluzione non ammissibile.")
                 ok = -1
         else:
             print("Tutte le domande soddisfatte: Soluzione Ottima!")
             ok = 0
 else:
-    print("")
+    print("Il grafo non rispetta i vincoli base (assunzioni) del Minimum Cost Max Flow")

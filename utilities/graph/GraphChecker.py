@@ -9,7 +9,7 @@ class GraphChecker:
 
     def _is_directed(self) -> bool:
         """
-        Controlla se almeno un arco ha un suo opposto identico, allora ritorna False
+        controlla se almeno un arco ha un suo opposto identico, allora ritorna False
         """
         for edge in self._to_check.edges:
            reverse = self._to_check.get_edge(edge.target, edge.source)
