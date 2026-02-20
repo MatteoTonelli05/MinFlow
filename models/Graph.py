@@ -132,7 +132,7 @@ class Graph:
         nodesDes : list[str] = [title]
         for n in self._nodes:
             nodesDes.append(f"archi uscenti dal nodo {n}:\n")
-            for e in self._adj.get(n, []):
+            for e in list(filter(lambda x: x.cost > 0, self._adj.get(n, []))):
                 nodesDes.append(f"\t{e}\n")
                 totalCost += e.cost if e.flow > 0 else 0
         nodesDes.append(f"il costo complessivo del flusso è {str(totalCost)}")

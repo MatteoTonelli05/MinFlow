@@ -6,7 +6,6 @@ from pathlib import Path
 from utilities.graph.Plotting import plot
 from utilities.loaders.Loader import Loader
 from utilities.known_algorithms.Disjkstra import dijkstra
-import pprint
 
 def selectSource(graph: Graph) -> Node:
     """
@@ -42,7 +41,7 @@ def get_min_residual_capacity(path: list[Edge]) -> int:
             return min(map(lambda x: x.residual_capacity, path))
         return 0
 
-file_path = Path("resource") / "grafo_iniziale.json"
+file_path = Path("resource") / "temp.json"
 config_path = Path("resource") / "config.yml"
 graph = Graph(file_path)
 checker = GraphChecker(graph)
