@@ -90,7 +90,7 @@ La **struttura** è divisa in due array principali:
    - source: ID del nodo di partenza
    - target: ID del nodo di arrivo
    - capacity: Il flusso massimo che può transitare su questo arco
-   - cost: Il costo unitario per inviare flusso su questo arco
+   - cost: Il costo per inviare flusso su questo arco
 
 *ESEMPIO DI JSON CORRETTO*
    ```json
