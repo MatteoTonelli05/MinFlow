@@ -192,15 +192,10 @@ Poiché ogni passo riduce il disavanzo totale tra domanda e offerta, l'algoritmo
 L'algoritmo opera attraverso una serie di iterazioni. In ogni iterazione, viene inviata almeno una unità di flusso lungo un cammino minimo tra un nodo sorgente e un nodo destinazione.\
 La **complessità computazionale** tiene conto di:
 - **Numero di Iterazioni**\
-Nel caso peggiore, l'algoritmo esegue un numero di iterazioni pari alla somma delle disponibilità totali dei nodi sorgente, indicata solitamente con\
-\
-$U = \sum_{i:b_i>0} b_i$\
-\
+Nel caso peggiore, l'algoritmo esegue un numero di iterazioni pari alla somma delle disponibilità totali dei nodi sorgente, indicata solitamente con $U = \sum_{i:b_i>0} b_i$\
 Questo accade perché ogni iterazione può trasportare anche solo una singola unità di flusso.
  - **Costo per Iterazione**\
-  Ogni passo richiede la ricerca di un cammino minimo su un grafo con $n$ nodi e $m$ archi. Utilizzando l'algoritmo di Dijkstra con una gestione efficiente della coda di priorità (ad esempio con un heap), il costo di questa operazione è\
-  \
-  $O(m + n \log n)$
+  Ogni passo richiede la ricerca di un cammino minimo su un grafo con $n$ nodi e $m$ archi. Utilizzando l'algoritmo di Dijkstra con una gestione efficiente della coda di priorità (ad esempio con un heap), il costo di questa operazione è $O(m + n \log n)$
 
 **Complessità Totale**: $O(U \cdot (m + n \log n))$.
 - **Nota:** Poiché la complessità dipende dal valore numerico delle disponibilità ($U$) e non solo dalla dimensione del grafo, l'SSP è classificato come un algoritmo **Pseudo Polinomiale**.
