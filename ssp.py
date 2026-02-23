@@ -41,7 +41,7 @@ def get_min_residual_capacity(path: list[Edge]) -> int:
             return min(map(lambda x: x.residual_capacity, path))
         return 0
 
-file_path = Path("resource") / "temp.json"
+file_path = Path("resource") / "grafo_iniziale.json"
 config_path = Path("resource") / "config.yml"
 graph = Graph(file_path)
 checker = GraphChecker(graph)
