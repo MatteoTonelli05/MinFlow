@@ -40,7 +40,7 @@
             "source": "1",
             "target": "2",
             "capacity": 4,
-            "cost": 1
+            "cost": 2
         },
         {
             "source": "2",

@@ -8,6 +8,7 @@ class Graph:
         self._edges: list[Edge] = []
         self._adj: dict[str, list[Edge]] = {}
         self._radj: dict[str, list[Edge]] = {}
+        self._totCost : int = 0
 
         if file_path:
             # Assumendo che Loader ritorni il dict corretto
@@ -104,7 +105,7 @@ class Graph:
         """
         for e in path:
             e.flow += delta
-            
+            self._totCost+=e.cost
             rev_edge = self.get_edge(e.target, e.source)
             if not rev_edge:
                 rev_edge = e.reverse()
@@ -153,6 +154,5 @@ class Graph:
             nodesDes.append(f"archi uscenti dal nodo {n}:\n")
             for e in list(filter(lambda x: x.cost > 0, self._adj.get(n, []))):
                 nodesDes.append(f"\t{e}\n")
-                totalCost += e.cost if e.flow > 0 else 0
-        nodesDes.append(f"il costo complessivo del flusso è {str(totalCost)}")
+        nodesDes.append(f"il costo complessivo del flusso è {str(self._totCost)}")
         return "".join(nodesDes)

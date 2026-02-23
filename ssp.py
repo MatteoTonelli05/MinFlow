@@ -62,7 +62,7 @@ if checker.validateGraph():
                 graph.augment_flow(path, delta)
                 s.supply -= delta
                 t.supply += delta
-                
+                print(f"Cammino Aumentato di {delta}: {list(map(lambda x: x.source, path))}")
                 for n in graph.nodes:
                     if distances.get(n.id) < float('inf'):
                         n.potential = n.potential - distances.get(n.id)
