@@ -82,6 +82,19 @@ class Graph:
         """
         return self._nodes.get(id, None)
     
+    def remove_edge(self, edge: Edge) -> None:
+        """
+        Rimuove un arco dal grafo e aggiorna le liste di adiacenza.
+        
+        :param edge: L'oggetto Edge da rimuovere.
+        """
+        if edge in self._edges:
+            self._edges.remove(edge)
+        if edge.source in self._adj and edge in self._adj[edge.source]:
+            self._adj[edge.source].remove(edge)
+        if edge.target in self._radj and edge in self._radj[edge.target]:
+            self._radj[edge.target].remove(edge)
+
     def augment_flow(self, path: list[Edge], delta: int):
         """
         aggiorna il flusso lungo un cammino aumentante e gestisce i relativi archi residui.
@@ -95,8 +108,10 @@ class Graph:
             rev_edge = self.get_edge(e.target, e.source)
             if not rev_edge:
                 rev_edge = e.reverse()
+                rev_edge.capacity = delta
                 self.add_edge(rev_edge)
-        rev_edge.capacity = delta
+            if e.flow == e.capacity:
+                self.remove_edge(e)
 
     def get_adj(self, node_id : str) -> list[Edge]:
         """

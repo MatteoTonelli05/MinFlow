@@ -8,24 +8,30 @@ from models import Graph
 plt.ion()
 _fig = _ax = _ax_btn = None
 _continue = False
+_node_positions = None 
 
 def plot(graph: Graph, config: dict):
-    global _fig, _ax, _ax_btn, _continue
+    global _fig, _ax, _ax_btn, _continue, _node_positions
 
     DG = nx.DiGraph() # creo il grafo direzionato
+    node_labels = {}
+    node_color = {}
+    
+    for n in graph.nodes: # assegno i colori ai nodi in base alla loro funzione
+        node_labels[n.id] = f"{n.id}\n({n.supply})"
+        
+        color = "#00FF00" if n.supply > 0 else "#FF0000" if n.supply < 0 else "#EDEDED"
+        node_color[n.id] = config.get(
+            "supply_color" if n.supply > 0 else "demand_color" if n.supply < 0 else "empty_node_color", color
+        )
+        DG.add_node(n.id)
+
     for e in graph.edges:  # aggiungo tutti gli archi
         DG.add_edge(e.source, e.target, label=f"{e.flow}/{e.capacity} [c:{e.cost}]") # label  --> flow/capacity [cost]
 
-    node_color = {}
-    
-    # ho scelto lo shell layout perchè mi sembrava che mediante i cerchi concentrici rendesse più piacevole la vista
-    pos = nx.shell_layout(DG) 
-    for n in graph.nodes: # assegno i colori ai nodi in base alla loro funzione
-        if n.id in DG.nodes:
-            color = "#00FF00" if n.supply > 0 else "#FF0000" if n.supply < 0 else "#EDEDED"
-            node_color[n.id] = config.get(
-                "supply_color" if n.supply > 0 else "demand_color" if n.supply < 0 else "empty_node_color", color
-            ) 
+    if _node_positions is None:
+        # ho scelto lo shell layout perchè mi sembrava che mediante i cerchi concentrici rendesse più piacevole la vista
+        _node_positions = nx.shell_layout(DG) 
 
     edge_labels = nx.get_edge_attributes(DG, 'label')
 
@@ -44,14 +50,14 @@ def plot(graph: Graph, config: dict):
     btn.on_clicked(lambda e: globals().update(_continue=True))
 
     ig = InteractiveGraph(
-        DG, ax=_ax, node_layout=pos, edge_layout='arc',
+        DG, ax=_ax, node_layout=_node_positions, edge_layout='arc',
         edge_layout_kwargs=dict(rad=config.get("edge_curve_rad", 0.2)),
         arrows=True, node_color=node_color,
-        node_size=config.get("node_size", 8), node_labels=True,
+        node_size=config.get("node_size", 8), node_labels=node_labels,
         edge_labels=edge_labels, edge_width=config.get("edge_width", 2.5),
         edge_color=config.get("edge_color", "#333333"),
         edge_label_fontdict=dict(
-        size=config.get("font_size_edge_labels", 7)
+            size=config.get("font_size_edge_labels", 7)
         )
     )
     _fig.canvas.draw_idle()

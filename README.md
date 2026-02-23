@@ -203,10 +203,12 @@ La **complessità computazionale** tiene conto di:
 Nel caso peggiore, l'algoritmo esegue un numero di iterazioni pari alla somma delle disponibilità totali dei nodi sorgente, indicata solitamente con $U = \sum_{i:b_i>0} b_i$\
 Questo accade perché ogni iterazione può trasportare anche solo una singola unità di flusso.
  - **Costo per Iterazione**\
-  Ogni passo richiede la ricerca di un cammino minimo su un grafo con $n$ nodi e $m$ archi. Utilizzando l'algoritmo di Dijkstra con una gestione efficiente della coda di priorità (ad esempio con un heap), il costo di questa operazione è $O(m + n \log n)$
+  Ogni passo richiede la ricerca di un cammino minimo su un grafo con $n$ nodi e $m$ archi. Utilizzando l'algoritmo di Dijkstra con una gestione efficiente della coda di priorità (ad esempio con un heap), il costo di questa operazione è $O(m\log n)$
 
-**Complessità Totale**: $O(U \cdot (m + n \log n))$.
-- **Nota:** Poiché la complessità dipende dal valore numerico delle disponibilità ($U$) e non solo dalla dimensione del grafo, l'SSP è classificato come un algoritmo **Pseudo Polinomiale**.
+**Complessità Totale**: $O(U \cdot (m \log n))$.\
+**Note:** 
+1. Poiché la complessità dipende dal valore numerico delle disponibilità ($U$) e non solo dalla dimensione del grafo, l'SSP è classificato come un algoritmo **Pseudo Polinomiale**.
+2. La complessità varia in base alla struttura dati utilizzata ad esempio diventerebbe $O(U \cdot (m + n \log n))$ con un Fibonacci Heap
 
 
 
