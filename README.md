@@ -2,17 +2,18 @@
 **Algoritmo Successive Shortest Path per il Minimum Cost Flow**
 
 ## Descrizione del progetto
-Questo progetto implementa l’algoritmo **Successive Shortest Path (SSP)** per la risoluzione del problema di **Minimum Cost Flow** su grafi con nodi caratterizzati da valori di **supply** e **demand**.
+Questo progetto implementa l’algoritmo **Successive Shortest Path (SSP)** per la risoluzione del problema di **Minimum Cost Flow** dato un grafo descritto tramite un json.
 
 L’algoritmo procede iterativamente selezionando un nodo con supply positivo e individuando un cammino a costo minimo verso un nodo con domanda tramite l’algoritmo di **Dijkstra**. Il flusso viene quindi aggiornato nel grafo residuo fino alla soddisfazione di tutti i vincoli.
 
 Il progetto è stato sviluppato a scopo didattico nell’ambito del corso di **Ricerca Operativa**.
 
----
+Tutti i comandi trascritti durante questo documento sono pensati per la **bash Windows**.
+
 
 ## Linguaggi di programmazione
 [![Python][Python.js]][Python-url] \
-Ho scelto di usare python poichè interessato a librerie come NetworkX e Netgraph, che permettono di gestire strutture dati complesse e visualizzazioni interattive con pochissime righe di codice.
+Ho scelto di usare python poichè interessato a sfruttare le semplici visualizzazioni interattive di librerie come NetworkX e Netgraph
 
 ## Formati testuali
 [![JSON][JSON.js]][JSON-url] \
@@ -59,10 +60,10 @@ ssp_RicercaOperativa/
 
 ### Prerequisiti
 *(Consigliato)*\
-*Prima di installare i requisiti crea un ambiente virtuale per non far entrare in conflitto diverse verisioni di pacchetti che potrebbero già essere installati*
+*Prima di installare i requisiti consiglio di creare un ambiente virtuale per evitare conflitti tra eventuali diverse verisioni di pacchetti precedentemente installati*
    ```bash
    python -m venv venv
-   .\venv\Scripts\activate
+   .\venv\Scripts\activate.bat
    ```
 Tutti i requisiti sono elencati all'interno del file requirements.txt e facilmente scaricabili tramite comando Bash:
    ```bash
@@ -122,6 +123,17 @@ Per avviare lo script accedere alla cartella principale tramite il comando ```cd
 ```bash
 python ssp.py
 ```
+
+### Visualizzazione grafica
+Durante l'esecuzione dell'algoritmo, il sistema genera una finestra interattiva per il monitoraggio del flusso. La visualizzazione segue queste convenzioni:
+- **Nodi**: Ogni nodo riporta il proprio **ID** e il valore di **Supply** ($b_i$). Il colore del nodo cambia in base al suo stato (offerta, domanda o transito), visualizzabile dal file ```config.yml```.
+- **Archi**: Le etichette sugli archi mostrano i dati in tempo reale nel formato
+**flusso attuale / capacità (costo)**\
+- **Avanzamento**: L'algoritmo non procede automaticamente, il passaggio alla prossima iterazione avviene esclusivamente al click del pulsante dedicato, permettendo l'analisi passo-passo della rete residua e dei cammini minimi individuati.
+### Visualizzazione da CLI
+
+
+**Nota: alla chiusura della finestra di visualizzazione è obbligatorio chiudere da console l'attività del programma.**
 
 ## Formulazione Matematica del problema
 
@@ -189,11 +201,10 @@ Questo accade perché ogni iterazione può trasportare anche solo una singola un
   Ogni passo richiede la ricerca di un cammino minimo su un grafo con $n$ nodi e $m$ archi. Utilizzando l'algoritmo di Dijkstra con una gestione efficiente della coda di priorità (ad esempio con un heap), il costo di questa operazione è\
   \
   $O(m + n \log n)$
-  ---
-  **Complessità Totale**: $O(U \cdot (m + n \log n))$.\
-  
 
+**Complessità Totale**: $O(U \cdot (m + n \log n))$.
 - **Nota:** Poiché la complessità dipende dal valore numerico delle disponibilità ($U$) e non solo dalla dimensione del grafo, l'SSP è classificato come un algoritmo **Pseudo Polinomiale**.
+
 
 
 [Python.js]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
