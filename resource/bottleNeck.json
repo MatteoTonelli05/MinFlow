@@ -1,0 +1,46 @@
+{
+    "nodes": [
+        {
+            "id": "1",
+            "supply": 10
+        },
+        {
+            "id": "2",
+            "supply": 0
+        },
+        {
+            "id": "3",
+            "supply": 0
+        },
+        {
+            "id": "4",
+            "supply": -10
+        }
+    ],
+    "edges": [
+        {
+            "source": "1",
+            "target": "2",
+            "capacity": 5,
+            "cost": 1
+        },
+        {
+            "source": "2",
+            "target": "4",
+            "capacity": 10,
+            "cost": 1
+        },
+        {
+            "source": "1",
+            "target": "3",
+            "capacity": 10,
+            "cost": 5
+        },
+        {
+            "source": "3",
+            "target": "4",
+            "capacity": 10,
+            "cost": 1
+        }
+    ]
+}

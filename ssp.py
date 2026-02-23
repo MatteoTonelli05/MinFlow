@@ -41,7 +41,7 @@ def get_min_residual_capacity(path: list[Edge]) -> int:
             return min(map(lambda x: x.residual_capacity, path))
         return 0
 
-file_path = Path("resource") / "grafo_es.json"
+file_path = Path("resource") / "grid.json"
 config_path = Path("resource") / "config.yml"
 graph = Graph(file_path)
 checker = GraphChecker(graph)
@@ -59,10 +59,10 @@ if checker.validateGraph():
                 
                 path = graph.reconstruct_path(predecessors, s.id, t.id)
                 delta = min(s.supply, abs(t.supply), get_min_residual_capacity(path=path))
-                graph.augment_flow(path, delta)
+                unitCost = graph.augment_flow(path, delta)
                 s.supply -= delta
                 t.supply += delta
-                print(f"Cammino Aumentato di {delta}: {list(map(lambda x: (x.source,x.target), path))}")
+                print(f"Cammino Aumentato di {delta}: {list(map(lambda x: (x.source,x.target), path))} | costo unitario: {unitCost}")
                 for n in graph.nodes:
                     if distances.get(n.id) < float('inf'):
                         n.potential = n.potential - distances.get(n.id)

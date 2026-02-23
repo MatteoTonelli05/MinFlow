@@ -96,16 +96,18 @@ class Graph:
         if edge.target in self._radj and edge in self._radj[edge.target]:
             self._radj[edge.target].remove(edge)
 
-    def augment_flow(self, path: list[Edge], delta: int):
+    def augment_flow(self, path: list[Edge], delta: int) -> int:
         """
         aggiorna il flusso lungo un cammino aumentante e gestisce i relativi archi residui.
 
         :param path: lista di Edge che compongono il cammino da aggiornare
         :param delta: la quantità di flusso da aggiungere al cammino
+        :return unitCost: il costo unitario del percorso
         """
+        unitCost = 0
         for e in path:
             e.flow += delta
-            self._totCost+=e.cost
+            unitCost += (e.cost)
             rev_edge = self.get_edge(e.target, e.source)
             if not rev_edge:
                 rev_edge = e.reverse()
@@ -117,6 +119,8 @@ class Graph:
                 self.add_edge(rev_edge) # per sicurezza perchè a volte netgraph non aggiorna
             if e.flow == e.capacity:
                 self.remove_edge(e)
+        self._totCost+=(unitCost*delta)
+        return unitCost
 
     def get_adj(self, node_id : str) -> list[Edge]:
         """
@@ -147,12 +151,4 @@ class Graph:
         return path[::-1] # Inverte per avere l'ordine da sorgente a destinazione
 
     def __repr__(self) -> str:
-        title = "--- Stampa Grafico ---\n\n"
-        totalCost = 0
-        nodesDes : list[str] = [title]
-        for n in self._nodes:
-            nodesDes.append(f"archi uscenti dal nodo {n}:\n")
-            for e in list(filter(lambda x: x.cost > 0, self._adj.get(n, []))):
-                nodesDes.append(f"\t{e}\n")
-        nodesDes.append(f"il costo complessivo del flusso è {str(self._totCost)}")
-        return "".join(nodesDes)
+        return f"il costo complessivo del flusso è {str(self._totCost)}"

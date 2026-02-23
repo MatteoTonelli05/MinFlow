@@ -1,0 +1,66 @@
+{
+    "nodes": [
+        {
+            "id": "S1",
+            "supply": 5
+        },
+        {
+            "id": "S2",
+            "supply": 5
+        },
+        {
+            "id": "A",
+            "supply": 0
+        },
+        {
+            "id": "B",
+            "supply": 0
+        },
+        {
+            "id": "T1",
+            "supply": -5
+        },
+        {
+            "id": "T2",
+            "supply": -5
+        }
+    ],
+    "edges": [
+        {
+            "source": "S1",
+            "target": "A",
+            "capacity": 10,
+            "cost": 2
+        },
+        {
+            "source": "S2",
+            "target": "A",
+            "capacity": 5,
+            "cost": 1
+        },
+        {
+            "source": "A",
+            "target": "B",
+            "capacity": 3,
+            "cost": 1
+        },
+        {
+            "source": "B",
+            "target": "T1",
+            "capacity": 10,
+            "cost": 2
+        },
+        {
+            "source": "A",
+            "target": "T2",
+            "capacity": 10,
+            "cost": 5
+        },
+        {
+            "source": "S2",
+            "target": "T2",
+            "capacity": 2,
+            "cost": 10
+        }
+    ]
+}
