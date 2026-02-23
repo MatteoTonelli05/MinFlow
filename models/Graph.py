@@ -110,6 +110,10 @@ class Graph:
                 rev_edge = e.reverse()
                 rev_edge.capacity = delta
                 self.add_edge(rev_edge)
+            else:
+                rev_edge.capacity += delta
+                self.remove_edge(e)
+                self.add_edge(rev_edge) # per sicurezza perchè a volte netgraph non aggiorna
             if e.flow == e.capacity:
                 self.remove_edge(e)
 
