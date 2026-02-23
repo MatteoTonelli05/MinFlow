@@ -124,14 +124,22 @@ Per avviare lo script accedere alla cartella principale tramite il comando ```cd
 python ssp.py
 ```
 
-### Visualizzazione grafica
+## Visualizzazione grafica
 Durante l'esecuzione dell'algoritmo, il sistema genera una finestra interattiva per il monitoraggio del flusso. La visualizzazione segue queste convenzioni:
 - **Nodi**: Ogni nodo riporta il proprio **ID** e il valore di **Supply** ($b_i$). Il colore del nodo cambia in base al suo stato (offerta, domanda o transito), visualizzabile dal file ```config.yml```.
 - **Archi**: Le etichette sugli archi mostrano i dati in tempo reale nel formato
 **flusso attuale / capacità (costo)**\
 - **Avanzamento**: L'algoritmo non procede automaticamente, il passaggio alla prossima iterazione avviene esclusivamente al click del pulsante dedicato, permettendo l'analisi passo-passo della rete residua e dei cammini minimi individuati.
-### Visualizzazione da CLI
-
+## Configurazione
+Il file ```config.yaml``` agisce come centro di controllo per l'aspetto estetico del grafo. Di seguito la descrizione dei parametri disponibili:
+- **supply_color**: Definisce il colore dei nodi di "offerta" ($b_i > 0$).
+- **demand_color**: Definisce il colore dei nodi di "domanda" ($b_i < 0$).
+- **empty_node_color**: Colore utilizzato per i nodi di transito ($b_i = 0$).
+- **node_size**: Scala la dimensione del cerchio dei nodi.
+- **font_size_edge_labels**: Regola la leggibilità del testo sopra gli archi (flusso/capacità).
+- **edge_width**: Definisce lo spessore delle linee che collegano i nodi.
+- **seed**: Fissa la posizione dei nodi nello spazio; cambiando questo numero, il grafo verrà "mescolato" in una nuova disposizione.
+- **edge_curve_rad**: Gestisce la curvatura degli archi. Impostandolo a 0 gli archi saranno linee rette, mentre valori superiori creano archi curvi (indispensabile per distinguere archi che collegano gli stessi due nodi in direzioni opposte).
 
 **Nota: alla chiusura della finestra di visualizzazione è obbligatorio chiudere da console l'attività del programma.**
 
