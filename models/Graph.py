@@ -109,13 +109,14 @@ class Graph:
             e.flow += delta
             unitCost += (e.cost)
             rev_edge = self.get_edge(e.target, e.source)
+            print(f"{e.target}-{e.source} --> {rev_edge}")
             if not rev_edge:
                 rev_edge = e.reverse()
                 rev_edge.capacity = delta
                 self.add_edge(rev_edge)
             else:
                 rev_edge.capacity += delta
-                self.remove_edge(e)
+                self.remove_edge(rev_edge)
                 self.add_edge(rev_edge) # per sicurezza perchè a volte netgraph non aggiorna
             if e.flow == e.capacity:
                 self.remove_edge(e)
