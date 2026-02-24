@@ -4,14 +4,13 @@ from models.Node import Node
 
 class Graph:
     def __init__(self, file_path: str = None):
-        self._nodes: dict[str, Node] = {} # Usiamo un dict per accesso O(1)
+        self._nodes: dict[str, Node] = {} 
         self._edges: list[Edge] = []
         self._adj: dict[str, list[Edge]] = {}
         self._radj: dict[str, list[Edge]] = {}
         self._totCost : int = 0
 
         if file_path:
-            # Assumendo che Loader ritorni il dict corretto
             self._load(Loader.from_json(file_path))
     
     def _load(self, graph_data) -> None:
@@ -146,7 +145,7 @@ class Graph:
         while current != start_id:
             prev = predecessors.get(current)
             if prev is None:
-                return [] # Cammino non trovato
+                return [] 
             path.append(self.get_edge(prev, current))
             current = prev
         return path[::-1] # Inverte per avere l'ordine da sorgente a destinazione

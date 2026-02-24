@@ -20,7 +20,6 @@ class Node:
 
     @classmethod
     def from_dict(cls, data: dict) -> "Node":
-        # Spacchettiamo il dizionario direttamente nel costruttore
         return cls(
             id=data["id"],
             supply=data.get("supply", 0)
