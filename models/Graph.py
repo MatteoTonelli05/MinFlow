@@ -109,7 +109,7 @@ class Graph:
             e.flow += delta
             unitCost += (e.cost)
             rev_edge = self.get_edge(e.target, e.source)
-            print(f"{e.target}-{e.source} --> {rev_edge}")
+            # print(f"{e.target}-{e.source} --> {rev_edge}")
             if not rev_edge:
                 rev_edge = e.reverse()
                 rev_edge.capacity = delta
