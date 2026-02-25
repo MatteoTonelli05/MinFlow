@@ -11,11 +11,11 @@ class Node:
             raise ValueError("L'id del nodo non può essere vuoto.")
 
     @property
-    def is_source(self) -> bool:
+    def is_supply(self) -> bool:
         return self.supply > 0
     
     @property
-    def is_target(self) -> bool:
+    def is_demand(self) -> bool:
         return self.supply < 0
 
     @classmethod

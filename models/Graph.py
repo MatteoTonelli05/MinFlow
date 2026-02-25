@@ -55,10 +55,10 @@ class Graph:
         return list(self._edges)
 
     def get_supply_nodes(self) -> list[Node]:
-        return [n for n in self._nodes.values() if n.is_source]
+        return [n for n in self._nodes.values() if n.is_supply]
     
     def get_demand_nodes(self) -> list[Node]:
-        return [n for n in self._nodes.values() if n.is_target]
+        return [n for n in self._nodes.values() if n.is_demand]
 
     def get_edge(self, source: str, target: str) -> Edge:
         """
